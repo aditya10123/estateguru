@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block body %} 
+ 
+  <div class="container">
+    <!-- ============================ Order Summary Section ============================ -->
+    <div class="row">
+        <div class="col-sm-6 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mt-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-xs-center"><strong>Order Summary</strong></h3>
+                            </div>
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <td><strong>Property Name</strong></td>
+                                                <td class="text-xs-center"><strong>Property Price</strong></td>
+                                                <td class="text-xs-right"><strong>{{total_price}}</strong></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in cart_data %}
+                                            <tr>
+                                                <td>{{ item.pid.petname }}</td>
+                                                <td class="text-xs-center">{{ item.qty }}</td>
+                                                <td class="text-xs-right">{{ item.pid.price }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            
+                                            <tr>
+                                                <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+                                                <td class="emptyrow"></td>
+                                                <td class="emptyrow text-xs-center"><strong>Total</strong></td>
+                                                <td class="emptyrow text-xs-right"><b>{{ total_price }}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================ Address Section ============================ -->
+        <div class="col-sm-6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% for add in cust_deatils %}
+                        <div class="card flex-md-row mb-4 box-shadow h-md-250 mt-4 ml-4">
+                            <div class="card-body d-flex flex-columnalign-items-start">
+                                <h3 class="mb-0">Name: {{ add.name }}</h3>
+                                <p class="card-text mb-auto">Address: {{ add.address }}</p>
+                                <p class="card-text mb-auto">City: {{ add.city }}</p>
+                                <p class="card-text mb-auto">State: {{ add.state }}</p>
+                                <p class="card-text mb-auto">Pincode: {{ add.pincode }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ Payment Section ============================ -->
+    <div class="row">
+        <div class="col-sm-12">
+            {{ paypal.render }}
+        </div>
+    </div>
+</div> 
+{% endblock body %} 

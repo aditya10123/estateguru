@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+  <!-- Heading container -->
+  <div class="container text-center p-3 rounded shadow bg-primary mt-5">
+    <h2 class="text-white">Registration Form</h2>
+  </div>
+
+  <!-- Form container -->
+  <div class="container my-3 p-5 w-50 shadow-lg bg-white rounded">
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ forms.as_p }}
+
+      <!-- Submit button -->
+      <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary btn-lg" value="Register">
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+{% endblock body %} 

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+{% for i in searchdata %}
+<div class="col-md-6 mt-5">
+    <img src="{{i.image.url}}" class="card-img-top" alt="..." height="800px" width="500px">
+
+</div>
+<div class="col-md-6">
+    <h1 class="card-title">{{i.pro_name|upper}}</h1>
+    <p class="card-text">{{i.pro_price}}</p>
+   
+
+
+</div>
+{% endfor %}
+
+
+ 
+  
+{% endblock body %} 

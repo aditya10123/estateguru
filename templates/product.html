@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+{% block main %}
+<div class="container mt-5">
+    {% for i in pro %}
+    <div class="row mb-5">
+        <!-- Property Image Section -->
+        <div class="col-md-6">
+            <img src="{{i.image.url}}" class="img-fluid rounded shadow" alt="{{i.pro_name}}" height="300px">
+        </div>
+
+        <!-- Property Details Section -->
+        <div class="col-md-6">
+            <h1 class="text-uppercase mb-3">{{i.pro_name}}</h1><br>
+
+            <p class="fs-4 text-success mb-4">Downpayment: ₹ {{i.pro_price}}</p>
+            
+            <div class="d-flex flex-column gap-3">
+                <a href="{% url 'bookproperty' i.id %}" class="btn btn-primary">Book Property</a>
+                <a href="{% url 'viewproperty' %}" class="btn btn-secondary">View Booked Property</a>
+            </div>
+
+            {% if success %}
+            <div class="alert alert-success mt-3">
+                {{success}}
+            </div>
+            {% endif %}
+
+            {% if msg %}
+            <div class="alert alert-danger mt-3">
+                {{msg}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock main %}
+
+{% endblock body %}

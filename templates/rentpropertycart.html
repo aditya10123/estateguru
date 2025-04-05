@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+<div class="container-fluid mt-2" id="book">
+    <div class="row">
+        <!-- Left Column: Customer Details -->
+        <div class="col-md-8">
+            {% for i in data %}
+                {% if forloop.counter == 1 %}
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h4>Customer Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <h6><strong>Customer Name:</strong> {{i.uid.username}}</h6>
+                            <h6><strong>Customer Email:</strong> {{i.uid.email}}</h6>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <!-- Property List -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <img src="{{i.pid.image.url}}" class="img-fluid rounded shadow" alt="{{i.pid.pro_name}}" height="300px">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">{{i.pid.title}}</h5>
+                                <p class="card-text">{{i.pid.price}}</p>
+                                <h6>Time Period in Months</h6>
+                                <div class="d-flex align-items-center gap-3">
+                                    <a href="/updateproperty/0/{{i.id}}">
+                                        <button class="btn btn-danger">-</button>
+                                    </a>
+                                    <input type="number" class="form-control w-auto" value="{{i.qty}}">
+                                    <a href="/updateproperty/1/{{i.id}}">
+                                        <button class="btn btn-danger">+</button>
+                                    </a>
+                                </div>
+                                <div class="mt-3">
+                                    <a href="{% url 'remove_rentproperty' i.id %}">
+                                        <button class="btn btn-warning">Remove Property</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <!-- Right Column: Total Amount -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>Total Amount</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Total:</strong> {{total}}</p>
+                    <p><strong>Total Downpayment:</strong> {{total}}</p>
+                    <hr>
+                    <a href="{% url 'checkout1' %}" class="btn btn-primary w-100">Pay Amount</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+{% endblock body %} 
